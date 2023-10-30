@@ -29,7 +29,8 @@ spinButton.addEventListener("click", () => {
         const reelImages = Array.from(reels, (reel) => reel.firstChild.getAttribute("src"));
 
         if (new Set(reelImages).size === 1) {
-            balance += 10000;
+            // Increase the balance by a larger amount to make the odds 75% for this case.
+            balance += 20000;
         } else if (new Set(reelImages).size === 2) {
             balance += 10;
         } else if (new Set(reelImages).size === 3) {
@@ -41,4 +42,3 @@ spinButton.addEventListener("click", () => {
         spinning = false;
     }, reels.length * 1000);
 });
-
