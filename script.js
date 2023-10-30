@@ -1,4 +1,10 @@
-const images = ["https://hopeforfulanis.org/wp-content/uploads/2019/08/download-2.jpg", "image_link_here", "image_link_here", "image_link_here", "image_link_here"];
+const images = [
+    "https://hopeforfulanis.org/wp-content/uploads/2019/08/download-2.jpg",
+    "https://hopeforfulanis.org/wp-content/uploads/2019/08/download-2.jpg",
+    "https://hopeforfulanis.org/wp-content/uploads/2019/08/download-2.jpg",
+    "https://hopeforfulanis.org/wp-content/uploads/2019/08/download-2.jpg",
+    "https://hopeforfulanis.org/wp-content/uploads/2019/08/download-2.jpg"
+];
 const spinButton = document.getElementById("spin");
 const resultText = document.getElementById("result");
 let spinning = false;
@@ -20,8 +26,7 @@ spinButton.addEventListener("click", () => {
 
     reels.forEach((reel, index) => {
         setTimeout(() => {
-            const randomImage = images[Math.floor(Math.random() * images.length)];
-            reel.innerHTML = `<img src="${randomImage}" alt="Image ${index + 1}">`;
+            reel.innerHTML = `<img src="${images[index]}" alt="Image ${index + 1}">`;
         }, index * 1000);
     });
 
@@ -29,12 +34,8 @@ spinButton.addEventListener("click", () => {
         const reelImages = Array.from(reels, (reel) => reel.firstChild.getAttribute("src"));
 
         if (new Set(reelImages).size === 1) {
-            // Increase the balance by a larger amount to make the odds 75% for this case.
-            balance += 20000;
-        } else if (new Set(reelImages).size === 2) {
-            balance += 10;
-        } else if (new Set(reelImages).size === 3) {
-            balance += 2;
+            // Increase the balance by a larger amount when all five images match to make it a 100% chance.
+            balance += 10000;
         }
 
         resultText.textContent = `Balance: $${balance}`;
